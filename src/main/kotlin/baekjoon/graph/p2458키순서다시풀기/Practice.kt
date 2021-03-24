@@ -1,4 +1,4 @@
-package baekjoon.graph.p2458키순서
+package baekjoon.graph.p2458키순서다시풀기
 
 class Practice {
 }
