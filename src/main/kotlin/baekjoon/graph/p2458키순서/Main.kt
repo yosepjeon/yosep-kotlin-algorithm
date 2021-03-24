@@ -5,12 +5,6 @@ import java.util.*
 class Main {
 }
 
-class Student(
-    val id: Int,
-    val gtList: List<Student>,
-    val ltList: List<Student>,
-)
-
 fun main() {
     val scr = Scanner(System.`in`)
 
@@ -18,59 +12,59 @@ fun main() {
     val m = scr.nextInt()
 
     val students = arrayOfNulls<Int>(n)
-    val map = Array<Array<Int>>(n) { Array<Int>(n) { 0 } }
-    val reverseMap = Array<Array<Int>>(n) { Array<Int>(n) { 0 } }
+    val map = Array<Array<Boolean>>(n) { Array(n) { false } }
+    val reverseMap = Array<Array<Boolean>>(n) { Array(n) { false } }
 
-    val floydWashalMap = Array<Array<Int>>(n) { Array<Int>(n) { 0 } }
+//    val floydWashalMap = Array<Array<Boolean>>(n) { Array(n) { false } }
+//    val reversFloydWashalMap = Array<Array<Boolean>>(n) { Array(n) { false } }
 
-    for(i in 0 until n) {
+    for (i in 0 until m) {
         val start = scr.nextInt() - 1
         val end = scr.nextInt() - 1
 
-        map[start][end] = 1
-        reverseMap[end][start] = 1
+        map[start][end] = true
+        reverseMap[end][start] = true
     }
 
-    for(i in 0 until n) {
-        for(j in 0 until n) {
-            if(i == j) {
-                map[i][j] = 1
-                reverseMap[i][j] = 1
-            }
-        }
-    }
-
-    for(b in 0 until n) {
-        for(a in 0 until n) {
-            for(c in 0 until n) {
-                if(map[a][b] == 1 && map[b][c] == 1) {
-                    floydWashalMap[a][c] = 1
+    for (b in 0 until n) {
+        for (a in 0 until n) {
+            for (c in 0 until n) {
+                if (map[a][b] && map[b][c]) {
+                    map[a][c] = true
                 }
             }
         }
     }
 
-    for(b in 0 until n) {
-        for(a in 0 until n) {
-            for(c in 0 until n) {
-                if(reverseMap[a][b] == 1 && reverseMap[b][c] == 1) {
-                    floydWashalMap[a][c] = 1
+    for (b in 0 until n) {
+        for (a in 0 until n) {
+            for (c in 0 until n) {
+                if (reverseMap[a][b] && reverseMap[b][c]) {
+                    reverseMap[a][c] = true
                 }
             }
+        }
+    }
+
+    for(a in 0 until n) {
+        for(b in 0 until n) {
+            map[a][b] = (map[a][b] || reverseMap[a][b])
         }
     }
 
     var result = 0
-    for (a in 0 until n) {
-        var count = 0
-        for(b in 0 until n) {
-            if(floydWashalMap[a][b] == 1)
-                count++
+
+    loop1@for (a in 0 until n) {
+        loop2@for (b in 0 until n) {
+            if(a == b)
+                continue@loop2
+
+            if (!map[a][b])
+                continue@loop1
         }
 
-        if(count == n) {
-            result++
-        }
+//        println("$a: $count")
+        result++
     }
 
     println(result)
