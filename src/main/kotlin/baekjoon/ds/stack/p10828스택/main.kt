@@ -1,4 +1,4 @@
-package baekjoon.datastructure.p10828스택
+package baekjoon.ds.stack.p10828스택
 
 import java.util.*
 

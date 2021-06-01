@@ -1,4 +1,4 @@
-package baekjoon.datastructure.p9093단어뒤집기
+package baekjoon.ds.stack.p9093단어뒤집기
 
 import java.util.*
 
