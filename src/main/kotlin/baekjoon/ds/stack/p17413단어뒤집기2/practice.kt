@@ -31,31 +31,10 @@ fun main() {
             findIdx = str.indexOf('>')
             substr = str.substring(0, findIdx + 1)
 
-//            println(substr)
             result += substr
             str = str.substring(findIdx + 1)
             len = str.length
         }
-//        else if(str[0] == ' ') {
-//            str = str.substring(1)
-//
-//            findIdx = str.indexOfFirst {
-//                it == ' ' || it == '<'
-//            }
-//
-//            if(findIdx == -1) {
-//                idx = len
-//                substr = str.substring(1, len).reversed()
-//                result += substr
-//            }else {
-//                idx = findIdx
-//
-//                substr = str.substring(1, findIdx).reversed()
-//                result += substr
-//                str = str.substring(findIdx)
-//                len = str.length
-//            }
-//        }
         else {
             findIdx = str.indexOfFirst {
                 it == '<'
